@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const dotenv = require('dotenv');
 let instance = null;
+
 dotenv.config();
 
 
@@ -61,7 +62,7 @@ class DbService {
         try {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO names (name, date_added) VALUES (?,?);";
+                const query = "INSERT INTO names (users, date_added) VALUES (?,?);";
 
                 connection.query(query, [name, dateAdded] , (err, result) => {
                     if (err) reject(new Error(err.message));
@@ -76,7 +77,7 @@ class DbService {
             };
             */
            console.log(insertId);
-           return response;
+           //return response;
         } catch (error) {
             console.log(error);
         }
@@ -85,3 +86,4 @@ class DbService {
 
 
     module.exports = DbService;
+
