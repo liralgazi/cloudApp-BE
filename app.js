@@ -12,15 +12,29 @@ app.use(express.urlencoded({ extended : false }));
 
 //create
 app.post('/insert', (request,response)=> {
+    const {name} = request.body; 
+    const db = dbService.getDbServiceInstance();
+    const result = db.insertNewName(name);
+    result
+    .then(data => response.json({succsess: true}))
+    .catch(err => console.log(err));
+     console.log(request.body);
 
 });
 
 //read 
 app.get('/getAll', (request,response)=> {
+    const db = dbService.getDbServiceInstance();
+    const result = db.getAllData();
+
+    result
+    .then(data=> response.json({data: data}))
+    .catch(err => console.log(err));
+
     console.log('test');
-    response.json({
-        succsess: true
-    });
+    //response.json({
+      //  succsess: true
+   // });
 
 });
 
