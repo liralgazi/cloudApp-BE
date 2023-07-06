@@ -28,7 +28,7 @@ app.post('/insert', (request, response) => {
 
 // read
 app.get('/getAll', (request, response) => {
-    console.log('test');
+    //console.log('test');
     
     const db = dbService.getDbServiceInstance();
 
