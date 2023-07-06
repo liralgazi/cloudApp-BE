@@ -26,7 +26,7 @@ class DbService {
        async getAllData(){
         try{
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM fbDB";
+                const query = "SELECT * FROM fpDB";
 
                 connection.query(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -45,7 +45,7 @@ class DbService {
         try {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO fbDB (users, date_added) VALUES (?,?);";
+                const query = "INSERT INTO fpDB (users, date_added) VALUES (?,?);";
 
                 connection.query(query, [name, dateAdded] , (err, result) => {
                     if (err) reject(new Error(err.message));
@@ -70,7 +70,7 @@ class DbService {
     async searchByName(users) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM fbDB WHERE users = ?;";
+                const query = "SELECT * FROM fpDB WHERE users = ?;";
 
                 connection.query(query, [users], (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -90,7 +90,7 @@ class DbService {
         try {
             id = parseInt(id, 10); 
             const response = await new Promise((resolve, reject) => {
-                const query = "UPDATE fbDB SET users = ? WHERE id = ?";
+                const query = "UPDATE fpDB SET users = ? WHERE id = ?";
     
                 connection.query(query, [users, id] , (err, result) => {
                     if (err) reject(new Error(err.message));
@@ -110,7 +110,7 @@ class DbService {
         try {
             id = parseInt(id, 10); 
             const response = await new Promise((resolve, reject) => {
-                const query = "DELETE FROM fbDB WHERE id = ?";
+                const query = "DELETE FROM fpDB WHERE id = ?";
     
                 connection.query(query, [id] , (err, result) => {
                     if (err) reject(new Error(err.message));
