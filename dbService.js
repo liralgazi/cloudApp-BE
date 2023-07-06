@@ -13,6 +13,9 @@ const connection = mysql.createConnection({
     port: process.env.DB_PORT
 });
 
+console.log('verified to db');
+
+
 connection.connect((err) => {
     if (err)
         console.log(err.message);
@@ -26,7 +29,7 @@ class DbService {
        async getAllData(){
         try{
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM fpDB";
+                const query = "SELECT * FROM names";
 
                 connection.query(query, (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -45,7 +48,7 @@ class DbService {
         try {
             const dateAdded = new Date();
             const insertId = await new Promise((resolve, reject) => {
-                const query = "INSERT INTO fpDB (users, date_added) VALUES (?,?);";
+                const query = "INSERT INTO names (users, date_added) VALUES (?,?);";
 
                 connection.query(query, [name, dateAdded] , (err, result) => {
                     if (err) reject(new Error(err.message));
@@ -70,7 +73,7 @@ class DbService {
     async searchByName(users) {
         try {
             const response = await new Promise((resolve, reject) => {
-                const query = "SELECT * FROM fpDB WHERE users = ?;";
+                const query = "SELECT * FROM names WHERE users = ?;";
 
                 connection.query(query, [users], (err, results) => {
                     if (err) reject(new Error(err.message));
@@ -90,7 +93,7 @@ class DbService {
         try {
             id = parseInt(id, 10); 
             const response = await new Promise((resolve, reject) => {
-                const query = "UPDATE fpDB SET users = ? WHERE id = ?";
+                const query = "UPDATE names SET users = ? WHERE id = ?";
     
                 connection.query(query, [users, id] , (err, result) => {
                     if (err) reject(new Error(err.message));
@@ -110,7 +113,7 @@ class DbService {
         try {
             id = parseInt(id, 10); 
             const response = await new Promise((resolve, reject) => {
-                const query = "DELETE FROM fpDB WHERE id = ?";
+                const query = "DELETE FROM names WHERE id = ?";
     
                 connection.query(query, [id] , (err, result) => {
                     if (err) reject(new Error(err.message));
